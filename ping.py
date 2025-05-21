@@ -2,7 +2,7 @@
 Quick-n-dirty client to “ping” the KNN Docker service.
 
 • Adjust HOST and PORT if you mapped the container different.
-• `sample` must hold every feature column the model expects.
+• `sample` must hold every feature column the model expects, which are the columns listed below.
 """
 
 import requests
@@ -20,7 +20,7 @@ def health_check():
         r.raise_for_status()
         print("🟢 Service be alive ‘n kickin’!")
     except Exception as err:
-        print("🔴 No answer from yer FastAPI ship:", err)
+        print("🔴 No answer from your FastAPI:", err)
         raise
 
 # 2) Craft one row of feature data (replace w/ your meassured data)
