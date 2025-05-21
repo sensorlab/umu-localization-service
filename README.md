@@ -1,4 +1,4 @@
-#UMU Localization Services
+# UMU Localization Services
 
 This repository contains Docker-based services for localization tasks developed within NANCY EU project. It includes multiple services, each contained in its own Docker container. Additionally, a simple Python script (`ping.py`) is included to demonstrate how to interact with the deployed services.
 
@@ -59,4 +59,6 @@ The `ping.py` script be a simple example of how to call the deployed API service
 pip install -r requirements.txt
 python ping.py
 ```
+## Acknowledgment
 
+This work was supported by funding from the European Union's Horizon Europe Framework Programme [NANCY](https://nancy-project.eu/) project under Grant Agreement No. 101096456.
