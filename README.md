@@ -59,4 +59,6 @@ The `ping.py` script be a simple example of how to call the deployed API service
 pip install -r requirements.txt
 python ping.py
 ```
+## Acknowledgment
 
+This work was supported by funding from the European Union's Horizon Europe Framework Programme [NANCY](https://nancy-project.eu/) project under Grant Agreement No. 101096456.
