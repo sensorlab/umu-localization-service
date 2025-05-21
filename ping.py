@@ -23,7 +23,7 @@ def health_check():
         print("🔴 No answer from yer FastAPI ship:", err)
         raise
 
-# 2) Craft one row of feature data (replace w/ your real column names)
+# 2) Craft one row of feature data (replace w/ your meassured data)
 sample = {"nas_value_5g_signal_strength_rsrp":-77.0,
           "nas_value_5g_signal_strength_snr":285.0,
           "nas_value_nr5g_cell_information_global_cell_id":2373238784.0,
