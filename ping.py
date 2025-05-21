@@ -10,7 +10,7 @@ import json
 from pprint import pprint   # pretty print for the console
 
 HOST = "localhost"   # or the container’s IP if you run on a swarm / k8s node
-PORT = 8000          # host-side port is exposed: `docker run -p 8000:80 ...`
+PORT = 8000          # host-side port is exposed: `docker run -p 8000:80 ... change accordingly`
 URL  = f"http://{HOST}:{PORT}"
 
 # 1) Optional health check – hit the OpenAPI spec
