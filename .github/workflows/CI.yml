@@ -40,7 +40,7 @@ jobs:
 
     - name: Build and Run api_tcp_nokia Docker container
       run: |
-        docker build -t api_tcp_nokia ./api_tcp_nokia
+        docker build --no-cache -t api_tcp_nokia ./api_tcp_nokia
         docker run -d --network fastapi_test_network --name api_tcp_nokia -p 8001:80 api_tcp_nokia
         for i in {1..10}; do
           if curl -s http://localhost:8001/docs; then
@@ -53,7 +53,7 @@ jobs:
 
     - name: Build and Run api_udp_aw2s Docker container
       run: |
-        docker build -t api_udp_aw2s ./api_udp_aw2s
+        docker build --no-cache -t api_udp_aw2s ./api_udp_aw2s
         docker run -d --network fastapi_test_network --name api_udp_aw2s -p 8002:80 api_udp_aw2s
         for i in {1..10}; do
           if curl -s http://localhost:8002/docs; then
@@ -66,7 +66,7 @@ jobs:
 
     - name: Build and Run api_udp_nokia Docker container
       run: |
-        docker build -t api_udp_nokia ./api_udp_nokia
+        docker build --no-cache -t api_udp_nokia ./api_udp_nokia
         docker run -d --network fastapi_test_network --name api_udp_nokia -p 8003:80 api_udp_nokia
         for i in {1..10}; do
           if curl -s http://localhost:8003/docs; then

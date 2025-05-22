@@ -41,13 +41,8 @@ def predict(features: dict, PORT):
     r.raise_for_status()          # blow up if code ≥400
     assert r.status_code == 200
 
-if __name__ == "__main__":
-    
-    health_check()
-
-    print("📡  Firing /predict …")
+def test_predicts():
     result_tcp_aw2s = predict(sample, 8000)
     result_tcp_nokia = predict(sample, 8001)
     result_udp_aw2s = predict(sample, 8002)
     result_udp_nokia = predict(sample, 8003)
-    print("🎯  All tests ok")
