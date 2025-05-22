@@ -1,4 +1,4 @@
-name: Test FastAPI NVG Endpoint
+name: Test FastAPI Endpoint
 
 on:
   push:
@@ -22,14 +22,13 @@ jobs:
     - name: Install test tools
       run: pip install requests pytest numpy
 
-    - name: Build api_tcp_aw2s Docker image
-      run: docker build -t api_tcp_aw2s ./api_tcp_aw2s
+    - name: Set up Docker network
+      run: docker network create fastapi_test_network
 
-    - name: Run container api_tcp_aw2s
-      run: docker run -d -p 8000:80 --name api_tcp_aw2s api_tcp_aw2s
-
-    - name: Wait for API to be Ready
+    - name: Build and Run api_tcp_aw2s Docker container
       run: |
+        docker build -t api_tcp_aw2s ./api_tcp_aw2s
+        docker run -d --network fastapi_test_network --name api_tcp_aw2s -p 8000:80 api_tcp_aw2s
         for i in {1..10}; do
           if curl -s http://localhost:8000/docs; then
             echo "API is up!"
@@ -38,15 +37,11 @@ jobs:
           echo "Waiting for API..."
           sleep 3
         done
-    
-    - name: Build api_tcp_nokia Docker image
-      run: docker build -t api_tcp_nokia ./api_tcp_nokia
 
-    - name: Run container api_tcp_nokia
-      run: docker run -d -p 8001:80 --name api_tcp_nokia api_tcp_nokia
-
-    - name: Wait for API to be Ready
+    - name: Build and Run api_tcp_nokia Docker container
       run: |
+        docker build -t api_tcp_nokia ./api_tcp_nokia
+        docker run -d --network fastapi_test_network --name api_tcp_nokia -p 8001:80 api_tcp_nokia
         for i in {1..10}; do
           if curl -s http://localhost:8001/docs; then
             echo "API is up!"
@@ -56,14 +51,10 @@ jobs:
           sleep 3
         done
 
-    - name: Build api_udp_aw2s Docker image
-      run: docker build -t api_udp_aw2s ./api_udp_aw2s
-
-    - name: Run container api_udp_aw2s
-      run: docker run -d -p 8002:80 --name api_udp_aw2s api_udp_aw2s
-
-    - name: Wait for API to be Ready
+    - name: Build and Run api_udp_aw2s Docker container
       run: |
+        docker build -t api_udp_aw2s ./api_udp_aw2s
+        docker run -d --network fastapi_test_network --name api_udp_aw2s -p 8002:80 api_udp_aw2s
         for i in {1..10}; do
           if curl -s http://localhost:8002/docs; then
             echo "API is up!"
@@ -73,14 +64,10 @@ jobs:
           sleep 3
         done
 
-    - name: Build api_udp_nokia Docker image
-      run: docker build -t api_udp_nokia ./api_udp_nokia
-
-    - name: Run container api_udp_nokia
-      run: docker run -d -p 8003:80 --name api_udp_nokia api_udp_nokia
-
-    - name: Wait for API to be Ready
+    - name: Build and Run api_udp_nokia Docker container
       run: |
+        docker build -t api_udp_nokia ./api_udp_nokia
+        docker run -d --network fastapi_test_network --name api_udp_nokia -p 8003:80 api_udp_nokia
         for i in {1..10}; do
           if curl -s http://localhost:8003/docs; then
             echo "API is up!"
@@ -90,19 +77,11 @@ jobs:
           sleep 3
         done
 
-    - name: Run API test
+    - name: Run API tests
       run: pytest tests/
 
-    - name: Cleanup
+    - name: Cleanup containers
       run: |
-        docker stop api_tcp_aw2s 
-        docker rm api_tcp_aw2s
-
-        docker stop api_tcp_nokia
-        docker rm api_tcp_nokia
-
-        docker stop api_udp_aw2s
-        docker rm api_udp_aw2s
-
-        docker stop api_udp_nokia
-        docker rm api_udp_nokia
+        docker stop api_tcp_aw2s api_tcp_nokia api_udp_aw2s api_udp_nokia
+        docker rm api_tcp_aw2s api_tcp_nokia api_udp_aw2s api_udp_nokia
+        docker network rm fastapi_test_network
