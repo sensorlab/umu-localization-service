@@ -1,4 +1,4 @@
-name: Test FastAPI Endpoint
+name: Test FastAPI Endpoint for localization services
 
 on:
   push:
