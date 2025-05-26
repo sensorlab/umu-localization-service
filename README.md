@@ -17,18 +17,14 @@ cd umu-localization-service
 Each service is located in its own folder. To build a Docker image for each, navigate to each folder and run the `docker build` command:
 
 ```bash
-# Navigate to each folder and build the Docker image
-cd api_tcp_aw2s
-docker build -t api_tcp_aw2s .
+# Build the Docker images of services
+docker build --no-cache -t api_tcp_aw2s ./api_tcp_aw2s
 
-cd api_tcp_nokia
-docker build -t api_tcp_nokia .
+docker build --no-cache -t api_tcp_nokia ./api_tcp_nokia
 
-cd api_udp_aw2s
-docker build -t api_udp_aw2s .
+docker build --no-cache -t api_udp_aw2s ./api_udp_aw2s
 
-cd api_udp_nokia
-docker build -t api_udp_nokia .
+docker build --no-cache -t api_udp_nokia ./api_udp_nokia
 ```
 ### 3. Run the Docker Containers
 
